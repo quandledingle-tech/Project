@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Wala - Contact Us</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #fff;
+            /* Add padding to prevent content from hiding under fixed nav */
+            padding-top: 76px;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: white;
+            position: fixed;
+            top: 0; /* Explicitly set top to 0 */
+            left: 0; /* Explicitly set left to 0 */
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: #000;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #000;
+        }
+        
+        /* Navigation Container - For Desktop Layout */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Hamburger Menu */
+        .menu-icon {
+            display: block;
+            cursor: pointer;
+            z-index: 102;
+            margin-left: 20px;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 2px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 101;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        
+        .sidenav a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+        
+        .sidenav .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            margin-left: 50px;
+        }
+        
+        .cart-icon {
+            margin-right: 10px;
+        }
+        
+        /* Contact Page Hero Banner */
+        .contact-hero {
+            height: 50vh;
+            background-color: #1a1a1a;
+            background-image: url('/api/placeholder/1920/600');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            /* Remove margin-top from here as we added padding-top to body */
+        }
+        
+        /* Contact Content */
+        .contact-container {
+            display: flex;
+            padding: 5rem 10%;
+            gap: 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            flex: 1;
+            padding-right: 2rem;
+        }
+        
+        .contact-form {
+            flex: 1.5;
+        }
+        
+        .contact-heading {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            background-color: #fafafa;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #999;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        
+        textarea {
+            height: 180px;
+            resize: vertical;
+        }
+        
+        .name-fields {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .name-field {
+            flex: 1;
+        }
+        
+        .required {
+            color: #999;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        
+        .submit-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: #000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #333;
+        }
+        
+        /* Newsletter Section */
+        .newsletter {
+            margin-top: 3rem;
+            border-top: 1px solid #eee;
+            padding-top: 2rem;
+        }
+        
+        .newsletter h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 1.5rem;
+            max-width: 100%;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.9rem;
+            border: 1px solid #ddd;
+            border-right: none;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #999;
+        }
+        
+        .newsletter-btn {
+            padding: 0.9rem 1.5rem;
+            background-color: #000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background-color: #333;
+        }
+        
+        .privacy-notice {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #999;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 5rem 5% 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 300;
+        }
+        
+        .footer-col a:hover {
+            color: #000;
+        }
+        
+        .footer-bottom {
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: #888;
+            font-size: 0.9rem;
+            max-width: 1400px;
+            margin: 4rem auto 0;
+        }
+        
+        /* Animation for page elements */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design - Desktop Optimization */
+        @media (min-width: 1600px) {
+            .contact-container {
+                padding: 6rem 15%;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .contact-container {
+                padding: 5rem 5%;
+                gap: 3rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .contact-container {
+                flex-direction: column;
+                padding: 4rem 5%;
+            }
+            
+            .contact-info {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-hero {
+                height: 30vh;
+            }
+            
+            .name-fields {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-heading {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="Furniture Wala.html" class="logo">Furniture Wala</a>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="Furniture Wala.html#projects">Collection</a></li>
+                <li><a href="Furniture Wala.html#featured">Featured</a></li>
+                <li><a href="Furniture Wala.html#about">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="menu-icon" onclick="openNav()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="Furniture Wala.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="object.html">Object</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html"><span class="cart-icon">🛒</span>Cart</a>
+    </div>
+    
+    <!-- Contact Hero Banner -->
+    <div class="contact-hero"></div>
+    
+    <!-- Contact Content -->
+    <div class="contact-container">
+        <div class="contact-info fade-in">
+            <h2 class="contact-heading">Let's work together</h2>
+            <p>We work locally and globally. Our award-winning work extends from Mumbai to Delhi, Bangalore to Kolkata, and beyond to international markets including the UAE, Singapore, Europe and the USA.</p>
+            <p>We look forward to discussing your dream, wherever you are in the world. Please fill out the form or get in touch below and let's begin the journey.</p>
+            
+            <p>t +91 97362 89821<br>
+            info@furniturewala.com</p>
+            
+            <p>Press and publicity enquiries to:<br>
+            press@furniturewala.com</p>
+            
+            <p>Employment enquiries to:<br>
+            careers@furniturewala.com</p>
+            
+            <div class="newsletter">
+                <h3>Newsletter</h3>
+                <p>Our newsletter is here to inspire you.<br>A curation of good things.</p>
+                
+                <div class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Email address">
+                    <button class="newsletter-btn">Sign Up</button>
+                </div>
+                <p class="privacy-notice">We respect your privacy</p>
+            </div>
+        </div>
+        
+        <div class="contact-form fade-in">
+            <form>
+                <div class="form-group">
+                    <label>Name <span class="required">(required)</span></label>
+                    <div class="name-fields">
+                        <div class="name-field">
+                            <input type="text" placeholder="First Name">
+                        </div>
+                        <div class="name-field">
+                            <input type="text" placeholder="Last Name">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email Address <span class="required">(required)</span></label>
+                    <input type="email">
+                </div>
+                
+                <div class="form-group">
+                    <label>Telephone <span class="required">(required)</span></label>
+                    <input type="tel">
+                </div>
+                
+                <div class="form-group">
+                    <label>Tell Us About Your Project <span class="required">(required)</span></label>
+                    <textarea></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Furniture Wala</h3>
+                <ul>
+                    <li>Agnel Ashram</li>
+                    <li>Bandra(W), Mumbai</li>
+                    <li>info@furniturewala.com</li>
+                    <li>9736289821</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Collection</h3>
+                <ul>
+                    <li><a href="living-room collection.html">Living Room</a></li>
+                    <li><a href="dining collection.html">Dining</a></li>
+                    <li><a href="bedroom collection.html">Bedroom</a></li>
+                    <li><a href="office collection.html">Office</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="object.html">Object</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Furniture Wala. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade in elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in class to elements
+            const fadeElements = document.querySelectorAll('.contact-info, .contact-form');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Function to handle scroll events
+            function handleScroll() {
+                const fadeIns = document.querySelectorAll('.fade-in');
+                fadeIns.forEach(fadeIn => {
+                    if (isInViewport(fadeIn)) {
+                        fadeIn.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial check
+            handleScroll();
+            
+            // Listen for scroll
+            window.addEventListener('scroll', handleScroll);
+        });
+        
+        // Hamburger menu functions
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+</html>

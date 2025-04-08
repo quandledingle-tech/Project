@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Wala - Our Work</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #fff;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: white;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: #000;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #000;
+        }
+        
+        /* Hamburger Menu */
+        .menu-icon {
+            display: block;
+            cursor: pointer;
+            z-index: 102;
+            margin-left: 20px;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 2px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 101;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        
+        .sidenav a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+        
+        .sidenav .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            margin-left: 50px;
+        }
+        
+        .cart-icon {
+            margin-right: 10px;
+        }
+        
+        /* Navigation Container - For Desktop Layout */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Work Page Specific Styles */
+        .page-header {
+            height: 60vh;
+            background-color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5%;
+            position: relative;
+            text-align: center;
+            padding-top: 5rem; /* Added padding to account for fixed nav */
+        }
+        
+        .page-title {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 8rem 5%;
+            background-color: #fff;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        
+        .process-item {
+            text-align: center;
+        }
+        
+        .process-number {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .process-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .process-desc {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+        
+        /* Projects Showcase */
+        .work-showcase {
+            padding: 5rem 5%;
+            background-color: #fafafa;
+        }
+        
+        .project {
+            display: flex;
+            margin-bottom: 8rem;
+            align-items: center;
+        }
+        
+        .project:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .project-visual {
+            flex: 1;
+            height: 70vh;
+            overflow: hidden;
+        }
+        
+        .project-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .project-visual:hover img {
+            transform: scale(1.05);
+        }
+        
+        .project-details {
+            flex: 1;
+            padding: 0 4rem;
+        }
+        
+        .project-type {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+        
+        .project-name {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .project-desc {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #000;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #333;
+        }
+        
+        /* Client Section */
+        .clients {
+            padding: 8rem 5%;
+            text-align: center;
+        }
+        
+        .client-logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .client-logo {
+            width: 150px;
+            height: 80px;
+            margin: 2rem;
+          
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+        
+        .client-logo:hover {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+        
+        /* Footer - Consistent with main page */
+        footer {
+            background-color: #f5f5f5;
+            padding: 5rem 5% 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 300;
+        }
+        
+        .footer-col a:hover {
+            color: #000;
+        }
+        
+        .footer-bottom {
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .project {
+                flex-direction: column;
+            }
+            
+            .project:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .project-details {
+                padding: 3rem 0;
+            }
+            
+            .project-visual {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .client-logo {
+                width: 100px;
+                margin: 1rem;
+            }
+            
+            .page-header {
+                height: 50vh;
+                padding-top: 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="Furniture Wala.html" class="logo">Furniture Wala</a>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="Furniture Wala.html#projects">Collection</a></li>
+                <li><a href="Furniture Wala.html#featured">Featured</a></li>
+                <li><a href="Furniture Wala.html#about">About</a></li>
+                <li><a href="Furniture Wala.html#contact">Contact</a></li>
+            </ul>
+            <div class="menu-icon" onclick="openNav()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="Furniture Wala.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="object.html">Object</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html"><span class="cart-icon">🛒</span>Cart</a>
+    </div>
+    
+    <!-- Page Header -->
+    <header class="page-header">
+        <div>
+            <h1 class="page-title">Our Work</h1>
+            <p class="page-subtitle">Explore our craftsmanship through custom projects and collaborations that showcase our design philosophy and commitment to quality.</p>
+        </div>
+    </header>
+    
+    <!-- Process Section -->
+    <section class="process">
+        <h2 class="section-title">Our Process</h2>
+        <div class="process-grid">
+            <div class="process-item fade-in">
+                <div class="process-number">01</div>
+                <h3 class="process-title">Design Consultation</h3>
+                <p class="process-desc">We begin with understanding your needs, space, and aesthetic preferences through in-depth consultations that allow us to capture your vision.</p>
+            </div>
+            <div class="process-item fade-in">
+                <div class="process-number">02</div>
+                <h3 class="process-title">Conceptualization</h3>
+                <p class="process-desc">Our designers create detailed sketches and 3D renderings, exploring materials and forms that align with your requirements and our design principles.</p>
+            </div>
+            <div class="process-item fade-in">
+                <div class="process-number">03</div>
+                <h3 class="process-title">Material Selection</h3>
+                <p class="process-desc">We source the finest sustainable materials, selecting woods, metals, fabrics, and finishes that ensure both aesthetic appeal and longevity.</p>
+            </div>
+            <div class="process-item fade-in">
+                <div class="process-number">04</div>
+                <h3 class="process-title">Craftsmanship</h3>
+                <p class="process-desc">Our master craftspeople bring designs to life using a blend of traditional woodworking techniques and modern precision technology.</p>
+            </div>
+            <div class="process-item fade-in">
+                <div class="process-number">05</div>
+                <h3 class="process-title">Quality Assurance</h3>
+                <p class="process-desc">Each piece undergoes rigorous quality checks to ensure it meets our exacting standards for structural integrity and finish quality.</p>
+            </div>
+            <div class="process-item fade-in">
+                <div class="process-number">06</div>
+                <h3 class="process-title">Installation</h3>
+                <p class="process-desc">Our professional team carefully delivers and installs your furniture, ensuring perfect placement and functionality within your space.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Showcase -->
+    <section class="work-showcase">
+        <h2 class="section-title">Selected Projects</h2>
+        
+        <div class="project fade-in">
+            <div class="project-visual">
+                <img src="modernres.jpeg" alt="Modern Restaurant Interior">
+            </div>
+            <div class="project-details">
+                <div class="project-type">Commercial Project</div>
+                <h3 class="project-name">Serene Restaurant, Mumbai</h3>
+                <p class="project-desc">A complete furniture solution for this award-winning restaurant, featuring custom dining tables, bar seating, and partition elements that create intimate dining zones while maintaining an open feel.</p>
+                <p class="project-desc">Working closely with the restaurant's interior design team, we developed pieces that complement the architectural features while enhancing the dining experience through thoughtful ergonomics.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project fade-in">
+            <div class="project-visual">
+                <img src="lugxury.jpeg" alt="Luxury Apartment Interior">
+            </div>
+            <div class="project-details">
+                <div class="project-type">Residential Project</div>
+                <h3 class="project-name">Bandra Residence</h3>
+                <p class="project-desc">A comprehensive furniture collection for a penthouse apartment, including statement living room pieces, a custom dining set, and bedroom furniture that balances luxury with minimalist sensibilities.</p>
+                <p class="project-desc">Each piece was designed to frame the spectacular views while creating a sense of warmth and intimacy within the expansive space.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+        
+        <div class="project fade-in">
+            <div class="project-visual">
+                <img src="officespace.jpeg" alt="Corporate Office Space">
+            </div>
+            <div class="project-details">
+                <div class="project-type">Workplace Project</div>
+                <h3 class="project-name">Tech Innovators HQ</h3>
+                <p class="project-desc">A modular workplace furniture system designed for a technology company's headquarters, featuring adaptive workstations, collaborative spaces, and acoustic solutions.</p>
+                <p class="project-desc">Our designs promote productivity while reflecting the company's innovative culture, with integrated technology solutions and flexibility for changing work patterns.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Client Section -->
+    <section class="clients">
+        <h2 class="section-title">Clients & Collaborators</h2>
+        <div class="client-logos">
+            <img class="client-logo fade-in" src="mouse.jpeg" alt="Client Logo 1">
+            <img class="client-logo fade-in" src="ele.jpeg" alt="Client Logo 2">
+            <img class="client-logo fade-in" src="pi.jpeg" alt="Client Logo 3">
+            <img class="client-logo fade-in" src="nose.jpeg" alt="Client Logo 4">
+            <img class="client-logo fade-in" src="bat.jpeg" alt="Client Logo 5">
+            <img class="client-logo fade-in" src="cat.jpeg" alt="Client Logo 6">
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Furniture Wala</h3>
+                <ul>
+                    <li>Agnel Ashram</li>
+                    <li>Bandra(W), Mumbai</li>
+                    <li>info@Furniture Wala.com</li>
+                    <li>9736289821</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Collection</h3>
+                <ul>
+                    <li><a href="living-room collection.html">Living Room</a></li>
+                    <li><a href="dining collection.html">Dining</a></li>
+                    <li><a href="bedroom collection.html">Bedroom</a></li>
+                    <li><a href="office collection.html">Office</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="object.html">Object</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Furniture Wala. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to detect when elements come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in class to certain elements
+            const fadeElements = document.querySelectorAll('.process-item, .project, .client-logo');
+            fadeElements.forEach(el => {
+                el.classList.add('fade-in');
+            });
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Function to handle scroll events
+            function handleScroll() {
+                const fadeIns = document.querySelectorAll('.fade-in');
+                fadeIns.forEach(fadeIn => {
+                    if (isInViewport(fadeIn)) {
+                        fadeIn.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial check
+            handleScroll();
+            
+            // Listen for scroll
+            window.addEventListener('scroll', handleScroll);
+        });
+        
+        // Hamburger menu functions
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+</html>

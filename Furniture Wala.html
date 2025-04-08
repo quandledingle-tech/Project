@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Wala - Modern Home Collections</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #fff;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: white;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: #000;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #000;
+        }
+        
+        /* Hamburger Menu */
+        .menu-icon {
+            display: block; /* Changed from 'none' to 'block' to show on desktop */
+            cursor: pointer;
+            z-index: 102;
+            margin-left: 20px;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 2px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 101;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        
+        .sidenav a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+        
+        .sidenav .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            margin-left: 50px;
+        }
+        
+        .cart-icon {
+            margin-right: 10px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-color: #fafafa;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 500px;
+            padding-top: 4rem;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            color: #666;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+        
+        .hero-img {
+            position: absolute;
+            right: 0;
+            width: 60%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Project/Product Grid - Hyde-inspired */
+        .projects {
+            padding: 8rem 5% 5rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            height: 70vh;
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+        
+        .project-info h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .project-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-price {
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+        
+        /* Featured Collection */
+        .featured {
+            padding: 5rem 5%;
+            background-color: #fafafa;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .featured-item {
+            position: relative;
+            overflow: hidden;
+            height: 50vh;
+            cursor: pointer;
+        }
+        
+        .featured-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .featured-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .featured-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .featured-item:hover .featured-info {
+            transform: translateY(0);
+        }
+        
+        .featured-info h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .featured-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* About Section - Hyde-inspired */
+        .about {
+            padding: 8rem 5%;
+            display: flex;
+            align-items: flex-start;
+            gap: 4rem;
+        }
+        
+        .about-img {
+            flex: 1;
+            height: 80vh;
+            overflow: hidden;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.03);
+        }
+        
+        .about-content {
+            flex: 1;
+            padding-top: 2rem;
+        }
+        
+        .about-content h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-weight: 300;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #000;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #333;
+        }
+        
+        /* Footer - Hyde-inspired */
+        footer {
+            background-color: #f5f5f5;
+            padding: 5rem 5% 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 300;
+        }
+        
+        .footer-col a:hover {
+            color: #000;
+        }
+        
+        .footer-bottom {
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Additional Hyde-inspired animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Navigation Container - For Desktop Layout */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .project-grid, .featured-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-img {
+                width: 50%;
+            }
+            
+            .about {
+                flex-direction: column;
+            }
+            
+            .about-img {
+                width: 100%;
+                height: 60vh;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: left;
+                padding-top: 6rem;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+            
+            .hero-img {
+                position: relative;
+                width: 100%;
+                height: 50vh;
+            }
+            
+            .project-grid, .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .sidenav {
+                padding-top: 60px;
+            }
+            
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">Furniture Wala</a>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#projects">Collection</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-icon" onclick="openNav()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="Furniture Wala.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="object.html">Object</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html"><span class="cart-icon">🛒</span>Cart</a>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Timeless designs for modern living</h1>
+            <p>We create furniture that balances aesthetic appeal with functional excellence, resulting in pieces that transform spaces and stand the test of time.</p>
+            <a href="#projects" class="btn">View Collection</a>
+        </div>
+        <div class="hero-img">
+            <img src="/api/placeholder/1200/800" alt="Modern living room furniture">
+        </div>
+    </section>
+            <section class="projects" id="projects">
+        <h2 class="section-title">Our Collection</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <a href="living-room collection.html" target="_blank">
+                <img src="Livingroom.jpeg" alt="Living Room Collection">
+                <div class="project-info">
+                </a>
+                    <h3>Living Room Collection</h3>
+                    <p>A curated selection of minimalist sofas, tables, and accent pieces designed to create a harmonious living environment.</p>
+                    <div class="project-price">From $1,299</div>
+                </div>
+            </div>
+            <div class="project-card">
+                <a href="dining collection.html" target="_blank">
+                <img src="di.jpeg" alt="Dining Collection">
+                <div class="project-info">
+                </a>
+                    <h3>Dining Collection</h3>
+                    <p>Tables and chairs crafted from sustainable materials with clean lines and enduring appeal.</p>
+                    <div class="project-price">From $2,499</div>
+                </div>
+            </div>
+            <div class="project-card">
+                <a href="bedroom collection.html" target="_blank">
+                <img src="bed.jpeg" alt="Bedroom Collection">
+                <div class="project-info">
+                </a>
+                    <h3>Bedroom Collection</h3>
+                    <p>Thoughtfully designed beds and storage solutions that create tranquil, restorative spaces.</p>
+                    <div class="project-price">From $1,899</div>
+                </div>
+            </div>
+            <div class="project-card">
+                <a href="office collection.html" target="_blank">
+                <img src="officespace.jpeg" alt="Office Collection">
+                <div class="project-info">
+                </a>
+                    <h3>Office Collection</h3>
+                    <p>Ergonomic workspaces that balance functionality with sophisticated design for the modern professional.</p>
+                    <div class="project-price">From $1,199</div>
+                </div>
+            </div>
+        </div>
+    </section>
+            
+    <!-- Featured Items Section -->
+    <section class="featured" id="featured">
+        <h2 class="section-title">Featured Pieces</h2>
+        <div class="featured-grid">
+            <div class="featured-item">
+                <img src="lv.jpeg" alt="Scandinavian Sofa">
+                <div class="featured-info">
+                    <h3>Scandinavian Sofa</h3>
+                    <p>Inspired by Nordic design principles, combining comfort with understated elegance.</p>
+                </div>
+            </div>
+            <div class="featured-item">
+                <img src="solid.jpg" alt="Solid Oak Dining Table">
+                <div class="featured-info">
+                    <h3>Solid Oak Dining Table</h3>
+                    <p>Handcrafted from sustainably sourced oak with attention to detail in every joint.</p>
+                </div>
+            </div>
+            <div class="featured-item">
+                <img src="geo.jpg" alt="Geometric Shelving">
+                <div class="featured-info">
+                    <h3>Geometric Shelving</h3>
+                    <p>Modular storage system that adapts to your space and evolves with your needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="craftmen.jpeg" alt="Craftsman working on furniture">
+        </div>
+        <div class="about-content">
+            <h2>The Furniture Wala Approach</h2>
+            <p>Founded on principles of exceptional craftsmanship and sustainable design, Furniture Wala creates furniture that becomes an integral part of your home's story.</p>
+            <p>Our design philosophy centers on the belief that truly exceptional furniture balances form and function in equal measure. Every curve, joint, and finish is considered not just for its aesthetic appeal, but for how it enhances the experience of living with each piece.</p>
+            <p>We work with a select group of master craftspeople who share our commitment to quality and sustainability. By combining traditional woodworking techniques with contemporary design sensibilities, we create pieces that honor the past while looking firmly toward the future.</p>
+            <a href="contact.html" class="btn">Get in Touch</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Furniture Wala</h3>
+                <ul>
+                    <li>Agnel Ashram</li>
+                    <li>Bandra(W), Mumbai</li>
+                    <li>info@Furniture Wala.com</li>
+                    <li>9736289821</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Collection</h3>
+                <ul>
+                    <li><a href="living-room collection.html">Living Room</a></li>
+                    <li><a href="dining collection.html">Dining</a></li>
+                    <li><a href="bedroom collection.html">Bedroom</a></li>
+                    <li><a href="office collection.html">Office</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="object.html">Object</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Furniture Wala. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to detect when elements come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in class to certain elements
+            const fadeElements = document.querySelectorAll('.project-card, .featured-item, .about-content p, .section-title');
+            fadeElements.forEach(el => {
+                el.classList.add('fade-in');
+            });
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Function to handle scroll events
+            function handleScroll() {
+                const fadeIns = document.querySelectorAll('.fade-in');
+                fadeIns.forEach(fadeIn => {
+                    if (isInViewport(fadeIn)) {
+                        fadeIn.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial check
+            handleScroll();
+            
+            // Listen for scroll
+            window.addEventListener('scroll', handleScroll);
+        });
+        
+        // Hamburger menu functions
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furniture Wala - Objects</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #fff;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: white;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: #000;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #000;
+        }
+        
+        /* Hamburger Menu */
+        .menu-icon {
+            display: block;
+            cursor: pointer;
+            z-index: 102;
+            margin-left: 20px;
+        }
+        
+        .bar {
+            width: 25px;
+            height: 2px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+        
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 101;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        
+        .sidenav a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+        
+        .sidenav .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 30px;
+            margin-left: 50px;
+        }
+        
+        .cart-icon {
+            margin-right: 10px;
+        }
+        
+        /* Navigation Container */
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Page Title */
+        .page-title {
+            padding: 120px 5% 40px;
+            font-weight: 300;
+            font-size: 2.5rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        
+        /* Objects Grid */
+        .objects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 5%;
+            margin-bottom: 60px;
+        }
+        
+        .object-item {
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .object-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .object-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        
+        .object-number {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 5px;
+            font-weight: 300;
+        }
+        
+        .object-title {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .object-designer {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 300;
+        }
+        
+        .object-status {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 300;
+        }
+        
+        /* Divider */
+        .divider {
+            height: 1px;
+            background-color: #f0f0f0;
+            margin: 60px 5%;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 7rem 5%;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .cta-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #000;
+            color: white;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #333;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 5rem 5% 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 300;
+        }
+        
+        .footer-col a:hover {
+            color: #000;
+        }
+        
+        .footer-bottom {
+            margin-top: 4rem;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .objects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+                padding-top: 100px;
+            }
+            
+            .objects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="Furniture Wala.html" class="logo">Furniture Wala</a>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="Furniture Wala.html#projects">Collection</a></li>
+                <li><a href="Furniture Wala.html#featured">Featured</a></li>
+                <li><a href="Furniture Wala.html#about">About</a></li>
+                <li><a href="Furniture Wala.html#contact">Contact</a></li>
+            </ul>
+            <div class="menu-icon" onclick="openNav()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Side Navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="Furniture Wala.html">Home</a>
+        <a href="work.html">Work</a>
+        <a href="object.html">Object</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html"><span class="cart-icon">🛒</span>Cart</a>
+    </div>
+    
+    <!-- Main Content -->
+    <h1 class="page-title">Designer Objects</h1>
+    
+    <div class="objects-grid">
+        <div class="object-item fade-in">
+            <img src="harmonylamp.jpeg" alt="Coming Soon" class="object-img">
+            <p class="object-number">04. Coming Soon</p>
+            <p class="object-title">Harmony Lounge Lamp</p>
+            <p class="object-designer">Design: Priya Mehta</p>
+            <p class="object-status">Available for Pre-order</p>
+        </div>
+        
+        <div class="object-item fade-in">
+            <img src="rainlight.jpeg" alt="Rain Light" class="object-img">
+            <p class="object-number">03. New</p>
+            <p class="object-title">Monsoon Rain Light</p>
+            <p class="object-designer">Design: Furniture Wala Studio</p>
+            <p class="object-status">Available Now - ₹32,500</p>
+        </div>
+        
+        <div class="object-item fade-in">
+            <img src="lotus.jpeg" alt="Lotus Side Table" class="object-img">
+            <p class="object-number">05. New Collection</p>
+            <p class="object-title">Lotus Side Table</p>
+            <p class="object-designer">Design: Rajiv Saini</p>
+            <p class="object-status">Available Now - ₹28,900</p>
+        </div>
+        
+        <div class="object-item fade-in">
+            <img src="metal.jpeg" alt="Metal Structure" class="object-img">
+            <p class="object-number">02. Limited Edition</p>
+            <p class="object-title">Varanasi Metal Sculpture</p>
+            <p class="object-designer">Furniture Wala × Aditya Kapoor</p>
+            <p class="object-status">Only 3 Remaining - ₹55,000</p>
+        </div>
+        
+        <div class="object-item fade-in">
+            <img src="blannket.jpeg" alt="Storm Blanket" class="object-img">
+            <p class="object-number">01. Heritage Collection</p>
+            <p class="object-title">Himalayan Storm Throw</p>
+            <p class="object-designer">Furniture Wala × Kashmir Crafts</p>
+            <p class="object-status">Available Now - ₹18,500</p>
+        </div>
+        
+        <div class="object-item fade-in">
+            <img src="art.jpeg" alt="Art Piece with Chair" class="object-img">
+            <p class="object-number">06. Collaboration</p>
+            <p class="object-title">Shadow Darkness Prints</p>
+            <p class="object-designer">Furniture Wala × Neha Singh</p>
+            <p class="object-status">Available Now - ₹12,500 (Set of 3)</p>
+        </div>
+    </div>
+    
+    <div class="divider"></div>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Need Something Custom?</h2>
+            <p>Our design team can work with you to create a piece tailored to your specific space, aesthetic preferences, and functional requirements.</p>
+            <a href="contact.html" class="btn">Request Custom Design</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Furniture Wala</h3>
+                <ul>
+                    <li>Agnel Ashram</li>
+                    <li>Bandra(W), Mumbai</li>
+                    <li>info@FurnitureWala.com</li>
+                    <li>9736289821</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Collection</h3>
+                <ul>
+                    <li><a href="living-room collection.html">Living Room</a></li>
+                    <li><a href="dining collection.html">Dining</a></li>
+                    <li><a href="bedroom collection.html">Bedroom</a></li>
+                    <li><a href="office collection.html">Office</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="object.html">Object</a></li>
+                    
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Furniture Wala. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to detect when elements come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in class to certain elements
+            const fadeElements = document.querySelectorAll('.object-item, .cta-content');
+            fadeElements.forEach(el => {
+                el.classList.add('fade-in');
+            });
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Function to handle scroll events
+            function handleScroll() {
+                const fadeIns = document.querySelectorAll('.fade-in');
+                fadeIns.forEach(fadeIn => {
+                    if (isInViewport(fadeIn)) {
+                        fadeIn.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial check
+            handleScroll();
+            
+            // Listen for scroll
+            window.addEventListener('scroll', handleScroll);
+        });
+        
+        // Hamburger menu functions
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+</html>
